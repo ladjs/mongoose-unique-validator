@@ -8,6 +8,8 @@
 
 > Mongoose plugin which adds pre-save validation for unique fields within a Mongoose schema. This makes error handling much easier, since you will get a Mongoose validation error when you attempt to violate a [unique constraint](http://mongoosejs.com/docs/api.html#schematype_SchemaType-unique), rather than an E11000 error from MongoDB.  Fork of the [original unmaintained package](https://github.com/mongoose-unique-validator/mongoose-unique-validator).
 
+> **NOTE:** As of v5.0.0+ if the only unique index is `_id`, then E11000 will be thrown by default.  This prevents an unnecessary call to `countDocuments` and is a major optimization.
+
 
 ## Table of Contents
 

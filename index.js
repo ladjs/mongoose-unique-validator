@@ -119,6 +119,15 @@ const plugin = function (schema, options) {
                       indexOptions.partialFilterExpression
                     );
 
+                  //
+                  // If the only `conditions` prop was `_id` then return early
+                  // (this is an optimization since the only uniqueness factor is built-in to Mongo)
+                  //
+                  if (Object.keys(conditions).length === 1 && conditions._id) {
+                    resolve(true);
+                    return;
+                  }
+
                   // Obtain the model depending on context
                   // https://github.com/Automattic/mongoose/issues/3430
                   // https://github.com/Automattic/mongoose/issues/3589

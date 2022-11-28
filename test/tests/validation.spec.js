@@ -490,9 +490,7 @@ module.exports = function (mongoose) {
       promise.then(function () {
         // Try saving a duplicate
         new Planet({ _id: id }).save().catch(function (err) {
-          expect(err.errors._id.name).to.equal('ValidatorError');
-          expect(err.errors._id.kind).to.equal('unique');
-          expect(err.errors._id.path).to.equal('_id');
+          expect(err.code).to.equal(11000);
 
           done();
         });
